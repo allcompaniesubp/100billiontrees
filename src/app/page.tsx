@@ -82,7 +82,7 @@ export default function Home() {
 
       <section className="section">
         <div className="section-inner callout">
-          <div><div className="kicker">A shared promise to tomorrow</div><h2>Let's grow a future worth inheriting.</h2><p>Bring your family, school, organisation or community. Learn what belongs in your landscape, plant responsibly and help care for it long after planting day.</p></div>
+          <div><div className="kicker">A shared promise to tomorrow</div><h2>Let&apos;s grow a future worth inheriting.</h2><p>Bring your family, school, organisation or community. Learn what belongs in your landscape, plant responsibly and help care for it long after planting day.</p></div>
           <a className="btn-primary" href="#contact">Contact the movement →</a>
         </div>
       </section>
