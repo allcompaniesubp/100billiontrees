@@ -7,11 +7,13 @@ export const metadata: Metadata = {
 };
 
 const qualifications = [
-  "Professional Doctorate in Business Management",
+  "Professional Doctorate in Business Management — European International University, Paris, and East Bridge University (USA & France)",
   "Master of Science in Electronics and Communication",
   "Bachelor of Laws (LL.B.)",
   "Advanced Postgraduate Diploma in Human Rights",
   "Postgraduate Diploma in Gandhi and Peace Studies — IGNOU",
+  "Law of International Organizations — United Nations Institute for Training and Research (UNITAR)",
+  "Other international certificate courses and professional learning",
 ];
 
 const focusAreas = [
@@ -63,8 +65,8 @@ export default function FounderPage() {
           </div>
           <div className="founder-copy">
             <p>Dr. Ravi Prasad Ch is an Indian professional whose experience brings together public service, technology, law, management and human-rights learning. He has served in the Indian Air Force for nearly two decades, gaining experience in a disciplined, technology-oriented environment where teamwork, responsibility and service are central.</p>
-            <p>Alongside his professional service, he has pursued multidisciplinary education spanning electronics and communication, business management, law, human rights, and Gandhi and Peace Studies. His interests include international cooperation, institutional development, education, technology and sustainable development.</p>
-            <p>He is associated with UNITAR Young Leaders engagement and is committed to exploring ways in which people, institutions and communities can work together on challenges that cross borders.</p>
+            <p>Alongside his professional service, he has pursued multidisciplinary education spanning electronics and communication, business management, law, human rights, and Gandhi and Peace Studies. His Professional Doctorate in Business Management is associated with European International University, Paris, and East Bridge University (USA &amp; France). His interests include international cooperation, institutional development, education, technology and sustainable development.</p>
+            <p>His international learning includes UNITAR Young Leaders engagement through the United Nations Institute for Training and Research (UNITAR), the course Law of International Organizations from UNITAR, and other international certificate courses. He is committed to exploring ways in which people, institutions and communities can work together on challenges that cross borders.</p>
           </div>
         </div>
       </section>
@@ -76,7 +78,7 @@ export default function FounderPage() {
           <p className="section-desc">The following qualifications and areas of study inform his approach to service, governance, technology and social impact.</p>
           <div className="qualification-grid">
             {qualifications.map((item, index) => <div className="qualification" key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>)}
-            <div className="qualification"><span>06</span><strong>UNITAR Young Leaders engagement</strong></div>
+            <div className="qualification"><span>08</span><strong>UNITAR Young Leaders engagement — United Nations Institute for Training and Research</strong></div>
           </div>
         </div>
       </section>
