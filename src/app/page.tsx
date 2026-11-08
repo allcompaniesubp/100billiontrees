@@ -83,14 +83,14 @@ export default function Home() {
       <section className="section">
         <div className="section-inner callout">
           <div><div className="kicker">A shared promise to tomorrow</div><h2>Let's grow a future worth inheriting.</h2><p>Bring your family, school, organisation or community. Learn what belongs in your landscape, plant responsibly and help care for it long after planting day.</p></div>
-          <a className="btn-primary" href="mailto:globaltrees@entirespace.org">Contact the movement →</a>
+          <a className="btn-primary" href="#contact">Contact the movement →</a>
         </div>
       </section>
 
-      <footer>
+      <footer id="contact">
         <div className="footer-inner">
           <div><div className="brand"><span className="brand-mark">✳</span>200 BILLION TREES</div><p>One planet. One human family. One green future.</p></div>
-          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr Ravi Prasad Ch</p><p><a href="#mission">Our mission</a>　·　<a href="#countries">Countries</a>　·　<a href="#participate">Get involved</a></p></div>
+          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr Ravi Prasad Ch</p><p>Official contact details will be published after the Foundation email domain is confirmed.</p><p><a href="#mission">Our mission</a>　·　<a href="#countries">Countries</a>　·　<a href="#participate">Get involved</a></p></div>
         </div>
         <div className="disclaimer">This is an independent movement initiative. It is not an official United Nations programme or government initiative. SDG references indicate areas of contribution, not endorsement. All progress figures will be published only after their methodology and evidence are reviewed. Contact email shown is a temporary placeholder and is not represented as an active mailbox.</div>
       </footer>
