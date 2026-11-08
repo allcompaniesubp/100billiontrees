@@ -12,6 +12,8 @@ const qualifications = [
   "Bachelor of Laws (LL.B.)",
   "Advanced Postgraduate Diploma in Human Rights",
   "Postgraduate Diploma in Gandhi and Peace Studies — IGNOU",
+  "Justice — HarvardX (online course; not a university degree)",
+  "Advanced Postgraduate Diploma in Human Rights",
   "Law of International Organizations — United Nations Institute for Training and Research (UNITAR)",
   "Other international certificate courses and professional learning",
 ];
@@ -41,6 +43,7 @@ export default function FounderPage() {
         <div className="founder-hero-inner">
           <div>
             <div className="eyebrow"><span className="dot"/> The person behind the initiative</div>
+            <img className="founder-portrait" src="/founder-ravi-prasad.jpg" alt="Dr. Ravi Prasad Ch, Founder of 200 Billion Trees" />
             <p className="founder-overline">FOUNDER · 200 BILLION TREES</p>
             <h1>Dr. Ravi<br/><span>Prasad Ch</span></h1>
             <p className="founder-lead">A life shaped by service, learning and a belief that meaningful progress begins when people take responsibility for the world they share.</p>
@@ -66,7 +69,7 @@ export default function FounderPage() {
           <div className="founder-copy">
             <p>Dr. Ravi Prasad Ch is an Indian professional whose experience brings together public service, technology, law, management and human-rights learning. He has served in the Indian Air Force for nearly two decades, gaining experience in a disciplined, technology-oriented environment where teamwork, responsibility and service are central.</p>
             <p>Alongside his professional service, he has pursued multidisciplinary education spanning electronics and communication, business management, law, human rights, and Gandhi and Peace Studies. His Professional Doctorate in Business Management is associated with European International University, Paris, and East Bridge University (USA &amp; France). His interests include international cooperation, institutional development, education, technology and sustainable development.</p>
-            <p>His international learning includes UNITAR Young Leaders engagement through the United Nations Institute for Training and Research (UNITAR), the course Law of International Organizations from UNITAR, and other international certificate courses. He is committed to exploring ways in which people, institutions and communities can work together on challenges that cross borders.</p>
+            <p>His international learning includes the HarvardX online course Justice, advanced study in Human Rights, UNITAR Young Leaders engagement through the United Nations Institute for Training and Research (UNITAR), the course Law of International Organizations from UNITAR, and other international certificate courses. He is committed to exploring ways in which people, institutions and communities can work together on challenges that cross borders.</p>
           </div>
         </div>
       </section>
@@ -118,8 +121,8 @@ export default function FounderPage() {
 
       <footer>
         <div className="footer-inner">
-          <div><Link className="brand" href="/"><span className="brand-mark">✳</span>200 BILLION TREES</Link><p>One planet. One human family. One green future.</p></div>
-          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr. Ravi Prasad Ch</p><p><Link href="/">Home</Link>　·　<Link href="/#mission">Our mission</Link>　·　<Link href="/founder">Founder</Link></p></div>
+          <div><Link className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" style={{width:280,maxWidth:"100%"}} /></Link><p>One planet. One human family. One green future.</p></div>
+          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr. Ravi Prasad Ch</p><p><a href="mailto:official.connectall.ind@gmail.com">official.connectall.ind@gmail.com</a></p><p><Link href="/">Home</Link>　·　<Link href="/#mission">Our mission</Link>　·　<Link href="/founder">Founder</Link></p></div>
         </div>
         <div className="disclaimer">Biographical information is provided for public introduction. This independent initiative does not imply endorsement by the United Nations or any government. Official contact details will be added after confirmation by the Foundation.</div>
       </footer>
