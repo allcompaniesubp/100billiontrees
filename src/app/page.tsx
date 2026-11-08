@@ -19,7 +19,7 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#"><span className="brand-mark">✳</span><span>200 BILLION<br/><small style={{fontSize:9,letterSpacing:2,color:"#72917b"}}>TREES · GLOBAL MOVEMENT</small></span></a>
         <nav className="nav" aria-label="Main navigation">
-          <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="#participate">Get involved</a>
+          <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="#participate">Get involved</a>
         </nav>
         <a className="header-cta" href="#participate">🌿 Join the movement</a>
       </header>
@@ -31,7 +31,7 @@ export default function Home() {
             <h1>One planet.<br/>A future that <span>grows.</span></h1>
             <p className="hero-copy">A shared ambition to plant, protect and nurture 200 billion trees — guided by local knowledge, ecological science and the power of people working together.</p>
             <div className="hero-actions"><a className="btn-primary" href="#participate">🌱 Plant your first tree <span>→</span></a><a className="btn-secondary" href="#mission">Discover the mission</a></div>
-            <p className="hero-note">Initiated by Entire Space Absolute Foundation · Founder: Dr Ravi Prasad Ch</p>
+            <p className="hero-note">Initiated by Entire Space Absolute Foundation · Founder: Dr Ravi Prasad Ch · <a href="/founder">Meet the Founder →</a></p>
           </div>
           <div className="hero-art">
             <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=85" alt="Sunlight filtering through a thriving green forest"/>
@@ -90,7 +90,7 @@ export default function Home() {
       <footer id="contact">
         <div className="footer-inner">
           <div><div className="brand"><span className="brand-mark">✳</span>200 BILLION TREES</div><p>One planet. One human family. One green future.</p></div>
-          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr Ravi Prasad Ch</p><p>Official contact details will be published after the Foundation email domain is confirmed.</p><p><a href="#mission">Our mission</a>　·　<a href="#countries">Countries</a>　·　<a href="#participate">Get involved</a></p></div>
+          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr Ravi Prasad Ch · <a href="/founder">Read Founder profile</a></p><p>Official contact details will be published after the Foundation email domain is confirmed.</p><p><a href="#mission">Our mission</a>　·　<a href="#countries">Countries</a>　·　<a href="#participate">Get involved</a></p></div>
         </div>
         <div className="disclaimer">This is an independent movement initiative. It is not an official United Nations programme or government initiative. SDG references indicate areas of contribution, not endorsement. All progress figures will be published only after their methodology and evidence are reviewed. Contact email shown is a temporary placeholder and is not represented as an active mailbox.</div>
       </footer>
