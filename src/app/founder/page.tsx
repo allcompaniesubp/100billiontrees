@@ -42,7 +42,6 @@ export default function FounderPage() {
         <div className="founder-hero-inner">
           <div>
             <div className="eyebrow"><span className="dot"/> The person behind the initiative</div>
-            <img className="founder-portrait" src="/founder-ravi-prasad.jpg" alt="Dr. Ravi Prasad Ch, Founder of 200 Billion Trees" />
             <p className="founder-overline">FOUNDER · 200 BILLION TREES</p>
             <h1>Dr. Ravi<br/><span>Prasad Ch</span></h1>
             <p className="founder-lead">A life shaped by service, learning and a belief that meaningful progress begins when people take responsibility for the world they share.</p>
