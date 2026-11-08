@@ -19,9 +19,9 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#"><span className="brand-mark">✳</span><span>200 BILLION<br/><small style={{fontSize:9,letterSpacing:2,color:"#72917b"}}>TREES · GLOBAL MOVEMENT</small></span></a>
         <nav className="nav" aria-label="Main navigation">
-          <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="#participate">Get involved</a>
+          <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="/trees">Trees</a><a href="/donate">Donate</a><a href="/community">Community</a><a href="#participate">Get involved</a>
         </nav>
-        <a className="header-cta" href="#participate">🌿 Join the movement</a>
+        <a className="header-cta" href="/sign-in">Sign in / Register</a>
       </header>
 
       <section className="hero">
@@ -89,10 +89,10 @@ export default function Home() {
 
       <footer id="contact">
         <div className="footer-inner">
-          <div><div className="brand"><span className="brand-mark">✳</span>200 BILLION TREES</div><p>One planet. One human family. One green future.</p></div>
-          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr Ravi Prasad Ch · <a href="/founder">Read Founder profile</a></p><p>Official contact details will be published after the Foundation email domain is confirmed.</p><p><a href="#mission">Our mission</a>　·　<a href="#countries">Countries</a>　·　<a href="#participate">Get involved</a></p></div>
+          <div><div className="brand"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" style={{width:280,maxWidth:"100%"}} /></div><p>One planet. One human family. One green future.</p></div>
+          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr Ravi Prasad Ch · <a href="/founder">Read Founder profile</a></p><p>Contact: <a href="mailto:official.connectall.ind@gmail.com">official.connectall.ind@gmail.com</a></p><p><a href="#mission">Our mission</a>　·　<a href="/countries">All countries</a>　·　<a href="/trees">Tree catalogue</a>　·　<a href="/donate">Donate</a>　·　<a href="/community">Community</a>　·　<a href="/certificates">Certificates</a>　·　<a href="/sign-in">Sign in</a></p></div>
         </div>
-        <div className="disclaimer">This is an independent movement initiative. It is not an official United Nations programme or government initiative. SDG references indicate areas of contribution, not endorsement. All progress figures will be published only after their methodology and evidence are reviewed. Contact email shown is a temporary placeholder and is not represented as an active mailbox.</div>
+        <div className="disclaimer">This is an independent movement initiative. It is not an official United Nations programme or government initiative. SDG references indicate areas of contribution, not endorsement. All progress figures will be published only after their methodology and evidence are reviewed. Contact email is provided by the Foundation for enquiries; donation, account and media features are not yet activated.</div>
       </footer>
     </main>
   );
