@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#"><span className="brand-mark">✳</span><span>200 BILLION<br/><small style={{fontSize:9,letterSpacing:2,color:"#72917b"}}>TREES · GLOBAL MOVEMENT</small></span></a>
+        <a className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation — India" style={{width:260,maxWidth:"100%"}} /></a>
         <nav className="nav" aria-label="Main navigation">
           <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="/trees">Trees</a><a href="/donate">Donate</a><a href="/community">Community</a><a href="#participate">Get involved</a>
         </nav>
