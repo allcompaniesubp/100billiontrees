@@ -1,3 +1,4 @@
+import Link from "next/link";
 const countries = [
   ["🇮🇳","India"],["🇺🇸","United States"],["🇧🇷","Brazil"],["🇮🇩","Indonesia"],
   ["🇨🇳","China"],["🇳🇬","Nigeria"],["🇲🇽","Mexico"],["🇦🇺","Australia"],
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation — India" style={{width:260,maxWidth:"100%"}} /></a>
+        <Link className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation NGO — India" style={{width:260,maxWidth:"100%"}} /></Link>
         <nav className="nav" aria-label="Main navigation">
           <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="/trees">Trees</a><a href="/donate">Donate</a><a href="/community">Community</a><a href="#participate">Get involved</a>
         </nav>
@@ -90,9 +91,9 @@ export default function Home() {
       <footer id="contact">
         <div className="footer-inner">
           <div><div className="brand"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" style={{width:280,maxWidth:"100%"}} /></div><p>One planet. One human family. One green future.</p></div>
-          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr Ravi Prasad Ch · <a href="/founder">Read Founder profile</a></p><p>Contact: <a href="mailto:official.connectall.ind@gmail.com">official.connectall.ind@gmail.com</a></p><p><a href="#mission">Our mission</a>　·　<a href="/countries">All countries</a>　·　<a href="/trees">Tree catalogue</a>　·　<a href="/donate">Donate</a>　·　<a href="/community">Community</a>　·　<a href="/certificates">Certificates</a>　·　<a href="/sign-in">Sign in</a></p></div>
+          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr Ravi Prasad Ch · <a href="/founder">Read Founder profile</a></p><p>Contact: <a href="mailto:official.connectall.ind@gmail.com">official.connectall.ind@gmail.com</a></p><p><a href="/legal-status">Organisation legal details</a></p><p><a href="#mission">Our mission</a>　·　<a href="/countries">All countries</a>　·　<a href="/trees">Tree catalogue</a>　·　<a href="/donate">Donate</a>　·　<a href="/community">Community</a>　·　<a href="/certificates">Certificates</a>　·　<a href="/sign-in">Sign in</a></p></div>
         </div>
-        <div className="disclaimer">This is an independent movement initiative. It is not an official United Nations programme or government initiative. SDG references indicate areas of contribution, not endorsement. All progress figures will be published only after their methodology and evidence are reviewed. Contact email is provided by the Foundation for enquiries; donation, account and media features are not yet activated.</div>
+        <div className="disclaimer">This is an independent movement initiative. It is not an official United Nations programme or government initiative. SDG references indicate areas of contribution, not endorsement. All progress figures will be published only after their methodology and evidence are reviewed. Registered entity: ENTIRESPACE ABSOLUTE FOUNDATION, a Section 8 company incorporated under the Companies Act, 2013. This website is an independent initiative; statutory permissions and tax eligibility for public donations must be checked separately. Donation, account and media features are not yet activated.</div>
       </footer>
     </main>
   );
