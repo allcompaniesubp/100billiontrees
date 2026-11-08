@@ -1,3 +1,15 @@
 import Link from "next/link";
-const providers=["Google","Microsoft","Apple"];
-export default function Register(){return <main className="auth-page"><Link href="/" className="auth-brand"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" width="300" /></Link><section className="auth-card"><div className="kicker">Join the movement</div><h1>Create your account</h1><p>Register as an individual, volunteer, school, community group or organisation.</p><form><label>Full name<input placeholder="Your name" required /></label><label>Email address<input type="email" placeholder="you@example.com" required /></label><label>Country<input placeholder="Country of residence" required /></label><label>Password<input type="password" placeholder="Create a password" required /></label><button type="button" disabled>Create account — activation pending</button></form><p className="auth-or">Or register with</p><div className="oauth-options">{providers.map(name=><button type="button" disabled key={name}>{name}</button>)}</div><p>Already registered? <Link href="/sign-in">Sign in</Link></p><small>Account creation and email verification will activate after database, secure authentication and mail delivery are configured.</small></section></main>}
+import RegisterForm from "./register-form";
+
+export default function Register() {
+  return <main className="auth-page">
+    <Link href="/" className="auth-brand"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" width="300" /></Link>
+    <section className="auth-card">
+      <div className="kicker">Join the movement</div>
+      <h1>Create your account</h1>
+      <p>Register as an individual, volunteer, school, community group or organisation.</p>
+      <RegisterForm />
+      <p><Link href="/verify">Email verification information</Link></p>
+    </section>
+  </main>;
+}
