@@ -13,7 +13,6 @@ const qualifications = [
   "Advanced Postgraduate Diploma in Human Rights",
   "Postgraduate Diploma in Gandhi and Peace Studies — IGNOU",
   "Justice — HarvardX (online course; not a university degree)",
-  "Advanced Postgraduate Diploma in Human Rights",
   "Law of International Organizations — United Nations Institute for Training and Research (UNITAR)",
   "Other international certificate courses and professional learning",
 ];
