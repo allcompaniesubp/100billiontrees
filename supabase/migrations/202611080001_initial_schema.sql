@@ -23,7 +23,12 @@ security definer
 set search_path = ''
 as $$
 begin
-  if auth.uid() is not null and (
+  if tg_op = 'INSERT' then
+    if auth.uid() is not null then
+      new.role = 'member';
+      new.approval_status = 'pending';
+    end if;
+  elsif auth.uid() is not null and (
     new.role is distinct from old.role or
     new.approval_status is distinct from old.approval_status
   ) then
@@ -36,7 +41,7 @@ $$;
 
 drop trigger if exists protect_profile_privileges_trigger on public.profiles;
 create trigger protect_profile_privileges_trigger
-before update on public.profiles
+before insert or update on public.profiles
 for each row execute function public.protect_profile_privileges();
 
 create table if not exists public.countries (
