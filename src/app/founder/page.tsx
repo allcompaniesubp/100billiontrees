@@ -120,7 +120,7 @@ export default function FounderPage() {
       <footer>
         <div className="footer-inner">
           <div><Link className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" style={{width:280,maxWidth:"100%"}} /></Link><p>One planet. One human family. One green future.</p></div>
-          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr. Ravi Prasad Ch</p><p><a href="mailto:official.connectall.ind@gmail.com">official.connectall.ind@gmail.com</a></p><p><Link href="/">Home</Link>　·　<Link href="/#mission">Our mission</Link>　·　<Link href="/founder">Founder</Link></p></div>
+          <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr. Ravi Prasad Ch</p><p>ENTIRESPACE ABSOLUTE FOUNDATION · Section 8 company, India</p><p><a href="mailto:official.connectall.ind@gmail.com">official.connectall.ind@gmail.com</a></p><p><Link href="/legal-status">Organisation legal details</Link></p><p><Link href="/">Home</Link>　·　<Link href="/#mission">Our mission</Link>　·　<Link href="/founder">Founder</Link></p></div>
         </div>
         <div className="disclaimer">Biographical information is provided for public introduction. This independent initiative does not imply endorsement by the United Nations or any government. Contact: official.connectall.ind@gmail.com. This independent initiative does not imply endorsement by the United Nations or any government.</div>
       </footer>
