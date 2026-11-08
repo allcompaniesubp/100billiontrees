@@ -14,6 +14,7 @@ const qualifications = [
   "Postgraduate Diploma in Gandhi and Peace Studies — IGNOU",
   "Justice — HarvardX (online course; not a university degree)",
   "Law of International Organizations — United Nations Institute for Training and Research (UNITAR)",
+  "UNITAR Young Leaders engagement — United Nations Institute for Training and Research",
   "Other international certificate courses and professional learning",
 ];
 
@@ -28,7 +29,7 @@ export default function FounderPage() {
   return (
     <main className="founder-page">
       <header className="site-header">
-        <Link className="brand" href="/"><span className="brand-mark">✳</span><span>200 BILLION<br/><small style={{fontSize:9,letterSpacing:2,color:"#72917b"}}>TREES · GLOBAL MOVEMENT</small></span></Link>
+        <Link className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation — India" style={{width:260,maxWidth:"100%"}} /></Link>
         <nav className="nav" aria-label="Main navigation">
           <Link href="/#mission">Our mission</Link>
           <Link href="/#progress">Global progress</Link>
@@ -79,7 +80,6 @@ export default function FounderPage() {
           <p className="section-desc">The following qualifications and areas of study inform his approach to service, governance, technology and social impact.</p>
           <div className="qualification-grid">
             {qualifications.map((item, index) => <div className="qualification" key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>)}
-            <div className="qualification"><span>08</span><strong>UNITAR Young Leaders engagement — United Nations Institute for Training and Research</strong></div>
           </div>
         </div>
       </section>
@@ -122,7 +122,7 @@ export default function FounderPage() {
           <div><Link className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" style={{width:280,maxWidth:"100%"}} /></Link><p>One planet. One human family. One green future.</p></div>
           <div><strong>Initiated by Entire Space Absolute Foundation</strong><p>Founder: Dr. Ravi Prasad Ch</p><p><a href="mailto:official.connectall.ind@gmail.com">official.connectall.ind@gmail.com</a></p><p><Link href="/">Home</Link>　·　<Link href="/#mission">Our mission</Link>　·　<Link href="/founder">Founder</Link></p></div>
         </div>
-        <div className="disclaimer">Biographical information is provided for public introduction. This independent initiative does not imply endorsement by the United Nations or any government. Official contact details will be added after confirmation by the Foundation.</div>
+        <div className="disclaimer">Biographical information is provided for public introduction. This independent initiative does not imply endorsement by the United Nations or any government. Contact: official.connectall.ind@gmail.com. This independent initiative does not imply endorsement by the United Nations or any government.</div>
       </footer>
     </main>
   );
