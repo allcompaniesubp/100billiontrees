@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Founder | Dr. Ravi Prasad Ch | 200 Billion Trees",
+  description: "Meet Dr. Ravi Prasad Ch, Founder of 200 Billion Trees, an initiative of Entire Space Absolute Foundation.",
+};
 
 const qualifications = [
   "Professional Doctorate in Business Management",
