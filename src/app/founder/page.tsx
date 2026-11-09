@@ -44,7 +44,7 @@ export default function FounderPage() {
       <section className="founder-hero">
         <div className="founder-hero-inner">
           <div>
-            <img src="/founder/dr-ravi-prasad-ch.jpg" alt="Portrait of Dr. Ravi Prasad Ch, Founder of 200 Billion Trees" width={300} height={400} loading="eager" style={{float:"right",width:"min(42%, 230px)",height:"auto",aspectRatio:"3 / 4",objectFit:"cover",objectPosition:"center top",margin:"0 0 24px 28px",borderRadius: "18px",border:"3px solid rgba(218,185,112,.8)",boxShadow:"0 18px 48px rgba(0,0,0,.22)"}} />
+            <figure className="founder-portrait"><img src="/founder/dr-ravi-prasad-ch.jpg?v=20261109-2" alt="Portrait of Dr. Ravi Prasad Ch, Founder of 200 Billion Trees" width={300} height={400} loading="eager" decoding="async" /><figcaption>Dr. Ravi Prasad Ch · Founder, 200 Billion Trees</figcaption></figure>
             <div className="eyebrow"><span className="dot"/> The person behind the initiative</div>
             <p className="founder-overline">FOUNDER · 200 BILLION TREES</p>
             <h1>Dr. Ravi<br/><span>Prasad Ch</span></h1>
