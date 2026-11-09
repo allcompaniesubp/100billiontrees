@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 type Project = { id: string; project_name: string; project_status: string };
@@ -22,7 +22,7 @@ export default function TreeRegistrationForm() {
   const [locating, setLocating] = useState(false);
   const [message, setMessage] = useState("Sign in to register trees against an approved project.");
 
-  async function load() {
+  const load = useCallback(async () => {
     const supabase = getSupabaseBrowserClient();
     const { data: auth, error: authError } = await supabase.auth.getUser();
     if (authError) throw authError;
@@ -43,9 +43,9 @@ export default function TreeRegistrationForm() {
     setMessage(data?.length
       ? "GPS capture is ready. Register each tree separately so every tree receives its own unique ID."
       : "No approved project is linked to your account yet. Submit a project and wait for approval before registering trees.");
-  }
+  }, [projectId]);
 
-  useEffect(() => { void load().catch((error) => setMessage(error instanceof Error ? error.message : "Could not load tree records.")); }, []);
+  useEffect(() => { void load().catch((error) => setMessage(error instanceof Error ? error.message : "Could not load tree records.")); }, [load]);
 
   function captureLocation() {
     if (!navigator.geolocation) { setMessage("This browser does not support GPS. Enter the coordinates manually."); return; }
