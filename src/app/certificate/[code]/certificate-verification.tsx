@@ -10,7 +10,7 @@ export default function CertificateVerification({ code }: { code: string }) {
   const [message, setMessage] = useState("Checking the certificate register…");
   useEffect(() => {
     let active = true;
-    void getSupabaseBrowserClient().from("certificates")
+    void getSupabaseBrowserClient().from("public_certificate_verification")
       .select("certificate_number,recipient_name_snapshot,certificate_type,status,issued_at,verification_code")
       .eq("verification_code", code).eq("status", "issued").maybeSingle()
       .then(({ data, error }) => {
