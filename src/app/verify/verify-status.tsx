@@ -39,6 +39,12 @@ export default function VerifyStatus() {
         if (!active) return;
 
         if (data.user?.email_confirmed_at) {
+          if (url.searchParams.get("flow") === "oauth") {
+            setMessage("Sign-in successful. Opening the community…");
+            window.history.replaceState({}, document.title, url.pathname);
+            window.location.assign("/community");
+            return;
+          }
           setMessage("Your email is confirmed successfully. You can now sign in. Your membership may still require administrator approval before uploading.");
           window.history.replaceState({}, document.title, url.pathname);
         } else if (data.user) {
