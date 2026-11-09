@@ -1,3 +1,14 @@
 import Link from "next/link";
-const providers=[["Google","Gmail / Google account"],["Microsoft","Microsoft account"],["Apple","Apple ID"]];
-export default function SignIn(){return <main className="auth-page"><Link href="/" className="auth-brand"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" width="300" /></Link><section className="auth-card"><div className="kicker">Member access</div><h1>Welcome back</h1><p>Sign in to manage planting records, projects and community activity.</p><form><label>Email address<input type="email" placeholder="you@example.com" required /></label><label>Password<input type="password" placeholder="Enter your password" required /></label><button type="button" disabled>Sign in — activation pending</button></form><p className="auth-or">Or continue with</p><div className="oauth-options">{providers.map(([name,label])=><button type="button" disabled key={name} aria-label={label}>{name}</button>)}</div><p><Link href="/forgot-password">Forgot password?</Link></p><p>New here? <Link href="/register">Create an account</Link></p><p><Link href="/verify">Email verification information</Link></p><small>Google, Microsoft and Apple sign-in are displayed as planned options. They will be activated only after OAuth applications, callback URLs and secure server-side credentials are configured.</small></section></main>}
+import SignInForm from "./sign-in-form";
+
+export default function SignIn() {
+  return <main className="auth-page">
+    <Link href="/" className="auth-brand"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation" width="300" /></Link>
+    <section className="auth-card">
+      <div className="kicker">Member access</div>
+      <h1>Welcome back</h1>
+      <p>Sign in to manage planting records, projects and community activity.</p>
+      <SignInForm />
+    </section>
+  </main>;
+}
