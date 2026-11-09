@@ -352,3 +352,18 @@ footer .brand{color:white}
 .certificate-issued small{font-size:10px;line-height:1.6;color:#758276}
 @media(max-width:720px){.admin-grid{grid-template-columns:1fr 1fr}.admin-contact-grid{grid-template-columns:1fr}.admin-cert-row{align-items:flex-start;flex-direction:column}.admin-cert-actions{justify-content:flex-start}}
 @media print{.site-header,header,.portal-hero,.certificate-check-status,.certificate-issued button{display:none!important}.certificate-check{max-width:none;margin:0;padding:0}.certificate-issued{border:2px solid #777;box-shadow:none}}
+
+/* Project proposal and survival monitoring workflows */
+.portal .max-w-3xl,.portal .max-w-5xl{width:calc(100% - 32px);margin-left:auto;margin-right:auto}
+.portal form{font-family:'DM Sans',sans-serif}
+.portal form label{font-size:13px;color:#315b41}
+.portal form input,.portal form select,.portal form textarea{font:inherit;color:#183329}
+.portal form button{cursor:pointer}
+.portal form button:focus-visible,.portal form input:focus-visible,.portal form select:focus-visible,.portal form textarea:focus-visible{outline:3px solid #8bb77a;outline-offset:2px}
+.portal .max-w-5xl>article{box-shadow:0 10px 30px #1a4b2b0b}
+.portal .max-w-5xl>article h2{font-size:20px;color:#174b32}
+.portal .max-w-5xl>article p{font-size:13px;line-height:1.7;color:#617469}
+.portal .max-w-5xl>article button{cursor:pointer;font:700 12px 'DM Sans',sans-serif}
+.portal .max-w-5xl>article button:focus-visible{outline:3px solid #8bb77a;outline-offset:3px}
+.portal .portal-note{width:calc(100% - 32px)}
+@media(max-width:640px){.portal header{height:auto;min-height:64px;flex-wrap:wrap;justify-content:flex-start;padding:12px 16px}.portal .portal-hero{padding-top:42px}}
