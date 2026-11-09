@@ -215,3 +215,13 @@ footer .brand{color:white}
   outline: 3px solid #8bb77a;
   outline-offset: 3px;
 }
+
+
+/* Social authentication buttons */
+.auth-card .social-auth{display:grid;gap:10px;margin:18px 0}
+.auth-card .social-auth>p{text-align:center;margin:0;color:#53665a;font-size:.92rem}
+.auth-card .social-auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.auth-card .social-auth-actions button{min-height:46px;padding:11px 12px;border:1px solid #b9cdbd;border-radius:10px;background:#fff;color:#174f34;font-weight:750;cursor:pointer}
+.auth-card .social-auth-actions button:hover:not(:disabled){background:#edf5ef;border-color:#6e9a78}
+.auth-card .social-auth-actions button:disabled{opacity:.6;cursor:wait}
+@media(max-width:420px){.auth-card .social-auth-actions{grid-template-columns:1fr}}
