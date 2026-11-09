@@ -16,6 +16,7 @@ export default function AdminCertificateManager() {
   const [recipientEmail, setRecipientEmail] = useState("");
   const [recipientWhatsApp, setRecipientWhatsApp] = useState("");
   const [certificateType, setCertificateType] = useState("Certificate of Appreciation");
+  const [deliveryTargets, setDeliveryTargets] = useState<Record<string, { email: string; whatsapp: string }>>({});
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("Checking administrator access…");
 
@@ -67,6 +68,7 @@ export default function AdminCertificateManager() {
       }).select("id,certificate_number,recipient_id,recipient_name_snapshot,certificate_type,status,issued_at,verification_code").single();
       if (error) throw error;
       setCertificates((current) => [data as Certificate, ...current]);
+      setDeliveryTargets((current) => ({ ...current, [data.id]: { email: recipientEmail, whatsapp: recipientWhatsApp } }));
       setMessage("Draft created: " + data.certificate_number + ". Review the recipient and evidence before issuing.");
     } catch (error) {
       setMessage(error instanceof Error ? "Could not create certificate: " + error.message : "Could not create certificate.");
@@ -91,12 +93,15 @@ export default function AdminCertificateManager() {
 
   function shareUrl(code: string) { return window.location.origin + "/certificate/" + encodeURIComponent(code); }
   function emailDraft(cert: Certificate) {
+    const email = deliveryTargets[cert.id]?.email ?? "";
+    if (!email) { setMessage("Enter this recipient’s email when creating the certificate to prepare an email draft."); return; }
     const subject = encodeURIComponent("Your 200 Billion Trees certificate — " + cert.certificate_number);
     const body = encodeURIComponent("Dear " + cert.recipient_name_snapshot + ",\n\nYour certificate has been issued by Entire Space Absolute Foundation.\nCertificate number: " + cert.certificate_number + "\nVerify it here: " + shareUrl(cert.verification_code) + "\n\nTogether for a Greener, Healthier and Peaceful World.");
-    window.location.href = "mailto:" + encodeURIComponent(recipientEmail) + "?subject=" + subject + "&body=" + body;
+    window.location.href = "mailto:" + encodeURIComponent(email) + "?subject=" + subject + "&body=" + body;
   }
   function whatsappDraft(cert: Certificate) {
-    const phone = recipientWhatsApp.replace(/[^0-9]/g, "");
+    const phone = (deliveryTargets[cert.id]?.whatsapp ?? "").replace(/[^0-9]/g, "");
+    if (!phone) { setMessage("Enter this recipient’s WhatsApp number when creating the certificate to prepare a WhatsApp message."); return; }
     const message = encodeURIComponent("Hello " + cert.recipient_name_snapshot + ", your 200 Billion Trees certificate " + cert.certificate_number + " has been issued. Verify it here: " + shareUrl(cert.verification_code));
     window.open("https://wa.me/" + phone + "?text=" + message, "_blank", "noopener,noreferrer");
   }
@@ -130,8 +135,8 @@ export default function AdminCertificateManager() {
         <div className="admin-cert-actions">
           {cert.status === "draft" ? <button type="button" disabled={busy} onClick={() => void issue(cert.id)}>Issue</button> : <>
             <a href={"/certificate/" + encodeURIComponent(cert.verification_code)} target="_blank" rel="noreferrer">View / print</a>
-            <button type="button" onClick={() => emailDraft(cert)} disabled={!recipientEmail}>Email draft</button>
-            <button type="button" onClick={() => whatsappDraft(cert)} disabled={!recipientWhatsApp.replace(/[^0-9]/g,"")}>WhatsApp</button>
+            <button type="button" onClick={() => emailDraft(cert)} disabled={!deliveryTargets[cert.id]?.email}>Email draft</button>
+            <button type="button" onClick={() => whatsappDraft(cert)} disabled={!deliveryTargets[cert.id]?.whatsapp.replace(/[^0-9]/g,"")}>WhatsApp</button>
           </>}
         </div>
       </article>) : <p>No certificates have been created.</p>}
