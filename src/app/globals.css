@@ -192,3 +192,26 @@ footer .brand{color:white}
   outline: 3px solid #8bb77a;
   outline-offset: 3px;
 }
+
+
+/* Final auth button states: enabled by default, muted only while submitting */
+.auth-card form button {
+  background: #174f34;
+  color: #fff;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  opacity: 1;
+}
+.auth-card form button:hover:not(:disabled) { background: #236b45; }
+.auth-card form button:disabled {
+  background: #aab9ac;
+  cursor: wait;
+  opacity: .75;
+}
+.auth-card form button:focus-visible {
+  outline: 3px solid #8bb77a;
+  outline-offset: 3px;
+}
