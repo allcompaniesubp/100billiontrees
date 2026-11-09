@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 export default function SocialSignIn() {
-  const router = useRouter();
   const [busy, setBusy] = useState<"google" | "github" | null>(null);
   const [message, setMessage] = useState("");
 
