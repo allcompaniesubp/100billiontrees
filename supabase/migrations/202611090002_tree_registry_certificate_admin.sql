@@ -109,7 +109,7 @@ grant select (certificate_number, recipient_name_snapshot, certificate_type, sta
   on public.certificates to anon;
 create policy certificates_public_verify_issued on public.certificates
 for select to anon using (status = 'issued');
-create view public.public_certificate_verification
+create or replace view public.public_certificate_verification
 with (security_invoker = true, security_barrier = true)
 as
 select certificate_number, recipient_name_snapshot, certificate_type,
