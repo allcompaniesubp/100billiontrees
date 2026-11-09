@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import SocialSignIn from "@/app/auth/social-sign-in";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -48,6 +49,7 @@ export default function RegisterForm() {
     <label>Password<input name="password" type="password" autoComplete="new-password" minLength={8} required /></label>
     <button type="submit" disabled={busy}>{busy ? "Creating account…" : "Create account"}</button>
     {message && <p role="status" aria-live="polite">{message}</p>}
+    <SocialSignIn />
     <p>Already registered? <Link href="/sign-in">Sign in</Link></p>
     <small>Confirm your email to activate your account. New members begin with pending approval; uploads require approval.</small>
   </form>;
