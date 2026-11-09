@@ -104,9 +104,13 @@ for update to authenticated using (private.is_staff()) with check (private.is_st
 
 -- Keep public verification limited to non-sensitive certificate fields.
 drop policy if exists certificates_public_verify_issued on public.certificates;
-revoke select on public.certificates from anon;
-create or replace view public.public_certificate_verification
-with (security_barrier = true)
+revoke all on public.certificates from anon;
+grant select (certificate_number, recipient_name_snapshot, certificate_type, status, issued_at, verification_code)
+  on public.certificates to anon;
+create policy certificates_public_verify_issued on public.certificates
+for select to anon using (status = 'issued');
+create view public.public_certificate_verification
+with (security_invoker = true, security_barrier = true)
 as
 select certificate_number, recipient_name_snapshot, certificate_type,
        status, issued_at, verification_code
