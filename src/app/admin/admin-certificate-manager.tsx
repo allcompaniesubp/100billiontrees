@@ -5,12 +5,14 @@ import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 type Profile = { id: string; display_name: string | null; role: string; approval_status: string };
 type Certificate = { id: string; certificate_number: string; recipient_id: string; recipient_name_snapshot: string; certificate_type: string; status: string; issued_at: string | null; verification_code: string };
+type TreeRecord = { id: string; tree_code: string; project_id: string; species_name: string; planted_on: string; latitude: number; longitude: number; verification_status: string };
 
 export default function AdminCertificateManager() {
   const [allowed, setAllowed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [trees, setTrees] = useState<TreeRecord[]>([]);
   const [recipientId, setRecipientId] = useState("");
   const [recipientName, setRecipientName] = useState("");
   const [recipientEmail, setRecipientEmail] = useState("");
@@ -35,14 +37,17 @@ export default function AdminCertificateManager() {
       return;
     }
     setAllowed(true);
-    const [{ data: people, error: peopleError }, { data: certs, error: certError }] = await Promise.all([
+    const [{ data: people, error: peopleError }, { data: certs, error: certError }, { data: treeRows, error: treeError }] = await Promise.all([
       supabase.from("profiles").select("id,display_name,role,approval_status").order("created_at", { ascending: false }),
       supabase.from("certificates").select("id,certificate_number,recipient_id,recipient_name_snapshot,certificate_type,status,issued_at,verification_code").order("created_at", { ascending: false }).limit(100),
+      supabase.from("tree_registry").select("id,tree_code,project_id,species_name,planted_on,latitude,longitude,verification_status").order("created_at", { ascending: false }).limit(100),
     ]);
     if (peopleError) throw peopleError;
     if (certError) throw certError;
+    if (treeError) throw treeError;
     setProfiles((people ?? []) as Profile[]);
     setCertificates((certs ?? []) as Certificate[]);
+    setTrees((treeRows ?? []) as TreeRecord[]);
     setLoading(false);
     setMessage("Administrator access verified. Certificate issuance is enabled.");
   }
@@ -91,6 +96,21 @@ export default function AdminCertificateManager() {
     } finally { setBusy(false); }
   }
 
+  async function reviewTree(id: string, status: "under_review" | "verified" | "rejected") {
+    setBusy(true);
+    try {
+      const { data: auth } = await getSupabaseBrowserClient().auth.getUser();
+      if (!auth.user) throw new Error("Please sign in again.");
+      const { data, error } = await getSupabaseBrowserClient().from("tree_registry")
+        .update({ verification_status: status, reviewed_by: auth.user.id, reviewed_at: new Date().toISOString() })
+        .eq("id", id).select("id,tree_code,project_id,species_name,planted_on,latitude,longitude,verification_status").single();
+      if (error) throw error;
+      setTrees((current) => current.map((tree) => tree.id === id ? data as TreeRecord : tree));
+      setMessage("Tree " + data.tree_code + " updated to " + status.replace("_", " ") + ".");
+    } catch (error) { setMessage(error instanceof Error ? error.message : "Could not update tree verification."); }
+    finally { setBusy(false); }
+  }
+
   function shareUrl(code: string) { return window.location.origin + "/certificate/" + encodeURIComponent(code); }
   function emailDraft(cert: Certificate) {
     const email = deliveryTargets[cert.id]?.email ?? "";
@@ -128,6 +148,13 @@ export default function AdminCertificateManager() {
       </div>
       <button className="admin-primary" type="submit" disabled={busy || !recipientId}>{busy ? "Saving…" : "Create certificate draft"}</button>
     </form>
+    <div className="admin-card">
+      <div className="admin-list-heading"><div><span className="kicker">Tree evidence review</span><h2>Individual tree registry</h2></div><span>{trees.length} records</span></div>
+      {trees.length ? trees.map((tree) => <article className="admin-cert-row" key={tree.id}>
+        <div className="admin-cert-main"><strong>{tree.tree_code}</strong><span>{tree.species_name} · planted {new Date(tree.planted_on + "T00:00:00").toLocaleDateString()}</span><small>{tree.verification_status.replace("_"," ")} · {tree.latitude.toFixed(6)}, {tree.longitude.toFixed(6)}</small><a href={"https://www.google.com/maps?q=" + tree.latitude + "," + tree.longitude} target="_blank" rel="noreferrer">Open GPS location ↗</a></div>
+        <div className="admin-cert-actions"><button type="button" disabled={busy} onClick={() => void reviewTree(tree.id,"under_review")}>Under review</button><button type="button" disabled={busy} onClick={() => void reviewTree(tree.id,"verified")}>Verify tree</button><button type="button" disabled={busy} onClick={() => void reviewTree(tree.id,"rejected")}>Reject</button></div>
+      </article>) : <p>No individual tree records have been submitted yet.</p>}
+    </div>
     <div className="admin-card">
       <div className="admin-list-heading"><div><span className="kicker">Issuance register</span><h2>Certificates</h2></div><span>{certificates.length} records</span></div>
       {certificates.length ? certificates.map((cert) => <article className="admin-cert-row" key={cert.id}>
