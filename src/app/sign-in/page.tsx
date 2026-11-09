@@ -9,7 +9,6 @@ export default function SignIn() {
       <h1>Welcome back</h1>
       <p>Sign in to manage planting records, projects and community activity.</p>
       <SignInForm />
-      <small>Social sign-in providers will be added after their official OAuth applications and callback URLs are configured.</small>
     </section>
   </main>;
 }
