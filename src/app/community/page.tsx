@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function Community() {
   return <main className="portal community-page">
-    <header><Link href="/">← 200 Billion Trees</Link><Link href="/projects">Projects</Link><Link href="/certificates">Certificates</Link></header>
+    <header><Link href="/">← 200 Billion Trees</Link><Link href="/projects">Projects</Link><Link href="/messages">Messages</Link><Link href="/certificates">Certificates</Link></header>
     <section className="portal-hero community-hero">
       <p className="kicker">A community that grows together</p>
       <h1>Share your green journey.</h1>

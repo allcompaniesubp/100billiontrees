@@ -257,3 +257,43 @@ footer .brand{color:white}
 .founder-portrait img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:3/4;object-fit:cover;object-position:center top;background:#edf2e9}
 .founder-portrait figcaption{padding:10px 12px;text-align:center;color:#536b58;font-size:11px;font-weight:700;letter-spacing:.02em}
 @media(max-width:640px){.founder-portrait{float:none;width:min(78%,300px);margin:0 auto 28px}.founder-hero-inner{grid-template-columns:1fr;gap:26px}.founder-hero{padding-top:42px;padding-bottom:48px}}
+
+
+/* Member messaging and upload clarity */
+.community-selected-file{margin:0;padding:10px 12px;border-radius:10px;background:#edf5ed;color:#365d40;font-size:12px}
+.community-pending a{display:inline-block;margin-top:10px;color:#176b42;font-weight:800;text-decoration:underline}
+.messages-page .portal-hero{padding-bottom:24px}
+.messaging-shell{max-width:1120px;margin:20px auto 60px;padding:0 20px}
+.messaging-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:stretch}
+.messaging-sidebar,.messaging-main,.messaging-new{background:#fff;border:1px solid #e1ebe2;border-radius:18px}
+.messaging-sidebar{padding:16px;min-height:360px}
+.messaging-sidebar-heading{display:flex;justify-content:space-between;align-items:center;padding:5px 4px 14px;color:#174b32}
+.messaging-sidebar-heading span{font-size:11px;color:#718477}
+.messaging-thread{width:100%;display:grid;gap:5px;text-align:left;padding:13px 12px;border:0;border-radius:11px;background:#f6faf6;color:#244b34;margin:4px 0;cursor:pointer}
+.messaging-thread.active{background:#e4f1e5;outline:1px solid #a8c8aa}
+.messaging-thread strong{font-size:13px;overflow-wrap:anywhere}
+.messaging-thread small{font-size:10px;color:#758477}
+.messaging-empty{font-size:12px;color:#718477}
+.messaging-main{min-height:440px;padding:20px;display:flex;flex-direction:column}
+.messaging-title{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf1ed;padding-bottom:15px}
+.messaging-title h2,.messaging-new h2{margin:5px 0 0;font-size:20px;color:#174b32}
+.messaging-open{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#517a59;background:#edf5ed;border-radius:99px;padding:7px 10px}
+.messaging-history{display:flex;flex-direction:column;gap:12px;padding:18px 0;flex:1;max-height:520px;overflow:auto}
+.messaging-bubble{max-width:82%;align-self:flex-start;padding:12px 14px;border-radius:14px 14px 14px 4px;background:#f0f5f0}
+.messaging-bubble.mine{align-self:flex-end;background:#e5f2e7;border-radius:14px 14px 4px 14px}
+.messaging-bubble p{margin:0 0 7px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.6}
+.messaging-bubble small{font-size:10px;color:#6b7e70}
+.messaging-reply,.messaging-new{display:grid;gap:10px}
+.messaging-reply{border-top:1px solid #edf1ed;padding-top:16px}
+.messaging-reply label,.messaging-new label{display:grid;gap:7px;font-size:12px;font-weight:700;color:#315b41}
+.messaging-reply textarea,.messaging-new textarea,.messaging-new input{width:100%;padding:12px;border:1px solid #cddbcf;border-radius:10px;background:#fff;font:inherit}
+.messaging-reply button,.messaging-new button{justify-self:start;border:0;border-radius:999px;padding:12px 20px;background:#1e633d;color:#fff;font-weight:700;cursor:pointer}
+.messaging-reply button:disabled,.messaging-new button:disabled{opacity:.55;cursor:wait}
+.messaging-new{margin-top:18px;padding:22px;display:grid;gap:14px}
+.messaging-new>div{margin-bottom:3px}
+.messaging-no-selection{margin:auto;text-align:center;max-width:360px;color:#617469}
+.messaging-no-selection>span{font-size:32px}
+.messaging-no-selection h2{color:#174b32}
+.messaging-no-selection p,.messaging-staff-note{font-size:12px;line-height:1.7;color:#718477}
+.messaging-staff-note{margin:14px 0}
+@media(max-width:760px){.messaging-layout{grid-template-columns:1fr}.messaging-sidebar{min-height:0;max-height:240px;overflow:auto}.messaging-main{min-height:400px;padding:15px}.messaging-bubble{max-width:94%}.messaging-shell{padding:0 12px}}

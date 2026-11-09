@@ -28,7 +28,8 @@ export default function CommunityMedia() {
 
   async function refresh() {
     const supabase = getSupabaseBrowserClient();
-    const { data: auth } = await supabase.auth.getUser();
+    const { data: auth, error: authError } = await supabase.auth.getUser();
+    if (authError) throw authError;
     const user = auth.user;
     setUserId(user?.id ?? null);
     if (!user) {
@@ -37,17 +38,19 @@ export default function CommunityMedia() {
       setMessage("Sign in or create an account to share community photos and videos.");
       return;
     }
+
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("approval_status")
       .eq("id", user.id)
       .maybeSingle();
     if (profileError) {
-      setMessage("We could not read your member approval status. Please try again later.");
+      setMessage("We could not read your member status. Please refresh and try again.");
       return;
     }
     const status = profile?.approval_status ?? "pending";
     setApproval(status);
+
     const { data, error } = await supabase
       .from("community_posts")
       .select("id,caption,media_path,media_type,moderation_status,created_at")
@@ -64,9 +67,14 @@ export default function CommunityMedia() {
       return { ...post, signedUrl: signed?.signedUrl };
     }));
     setPosts(hydrated);
-    setMessage(status === "approved"
-      ? "Your member account is approved. You can share photos and videos."
-      : "Your account is active, but uploads are available after a community administrator approves your membership.");
+
+    if (status === "approved") {
+      setMessage("Your member account is approved. You can upload photos and videos for review.");
+    } else if (status === "pending") {
+      setMessage("Your membership is pending. You can still submit photos and videos; every upload stays private until a moderator reviews it.");
+    } else {
+      setMessage("Your account is not currently eligible to upload. Please contact the Foundation if you think this is an error.");
+    }
   }
 
   useEffect(() => {
@@ -75,12 +83,12 @@ export default function CommunityMedia() {
       try {
         await refresh();
       } catch {
-        if (active) setMessage("Supabase is not configured in this deployment yet.");
+        if (active) setMessage("The community service could not connect. Please refresh and try again.");
       }
     })();
     const supabase = getSupabaseBrowserClient();
     const { data: listener } = supabase.auth.onAuthStateChange(() => {
-      if (active) void refresh();
+      if (active) queueMicrotask(() => { void refresh().catch(() => setMessage("Could not refresh your member session.")); });
     });
     return () => {
       active = false;
@@ -94,7 +102,7 @@ export default function CommunityMedia() {
 
   async function upload(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!userId || approval !== "approved" || !file || !consent) return;
+    if (!userId || !["approved", "pending"].includes(approval ?? "") || !file || !consent) return;
     if (!ACCEPTED.has(file.type)) {
       setMessage("Choose a JPG, PNG, WebP, MP4 or WebM file.");
       return;
@@ -114,6 +122,7 @@ export default function CommunityMedia() {
         .from("community-media")
         .upload(path, file, { contentType: file.type, upsert: false });
       if (uploadError) throw uploadError;
+
       const { error: insertError } = await supabase.from("community_posts").insert({
         author_id: userId,
         caption: caption.trim(),
@@ -126,15 +135,17 @@ export default function CommunityMedia() {
         await supabase.storage.from("community-media").remove([path]);
         throw insertError;
       }
+
       setCaption("");
       setFile(null);
       setConsent(false);
       const input = document.getElementById("community-media-file") as HTMLInputElement | null;
       if (input) input.value = "";
-      setMessage("Upload received. Your media is private and will appear publicly only after human moderation.");
+      setMessage("Upload received. It is private and will appear publicly only after a moderator approves it.");
       await refresh();
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Upload failed. Please try again.");
+      const detail = error instanceof Error ? error.message : "Unknown upload error";
+      setMessage(`Upload could not complete: ${detail}. Please check your connection and try again.`);
     } finally {
       setBusy(false);
     }
@@ -146,6 +157,8 @@ export default function CommunityMedia() {
     await refresh();
   }
 
+  const canUpload = approval === "approved" || approval === "pending";
+
   return <section className="community-media">
     <div className="community-media-heading">
       <div><p className="kicker">Member media space</p><h2>Community photos and videos</h2></div>
@@ -153,13 +166,14 @@ export default function CommunityMedia() {
     </div>
     <p className="community-media-status" role="status" aria-live="polite">{message}</p>
     {!userId ? <p><a className="community-contact" href="/sign-in">Sign in</a>　<a href="/register">Create an account</a></p> : <>
-      {approval === "approved" ? <form className="community-media-form" onSubmit={upload}>
-        <label>Photo or video<input id="community-media-file" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm" onChange={chooseFile} required /></label>
-        <small>JPG, PNG, WebP, MP4 or WebM · maximum 50 MB</small>
+      {canUpload ? <form className="community-media-form" onSubmit={upload}>
+        <label>Choose photos or videos<input id="community-media-file" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm" onChange={chooseFile} required /></label>
+        <small>JPG, PNG, WebP, MP4 or WebM · maximum 50 MB per file</small>
+        {file && <p className="community-selected-file">Selected: <strong>{file.name}</strong> · {(file.size / (1024 * 1024)).toFixed(2)} MB</p>}
         <label>Caption<textarea value={caption} onChange={(event) => setCaption(event.target.value)} maxLength={2000} rows={3} placeholder="Tell the community about your planting or tree-care activity." /></label>
         <label className="community-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} required /> I own this media or have permission to share it, have obtained consent from identifiable people, and understand it will remain private until reviewed.</label>
-        <button type="submit" disabled={busy || !file || !consent}>{busy ? "Uploading…" : "Upload for review"}</button>
-      </form> : <div className="community-pending"><strong>Membership approval pending</strong><p>To prevent spam and protect the community, uploads are enabled only for approved members. Your account is not blocked from browsing public pages.</p></div>}
+        <button type="submit" disabled={busy || !file || !consent}>{busy ? "Uploading…" : "Upload photo or video for review"}</button>
+      </form> : <div className="community-pending"><strong>Uploads temporarily unavailable</strong><p>Please contact the Foundation if you need help with your member account.</p><a href="/messages">Message the Foundation</a></div>}
       <div className="community-post-grid">
         {posts.map((post) => <article className="community-post" key={post.id}>
           {post.signedUrl ? post.media_type === "image"
