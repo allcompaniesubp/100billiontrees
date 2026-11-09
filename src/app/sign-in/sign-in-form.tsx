@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import SocialSignIn from "@/app/auth/social-sign-in";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function SignInForm() {
     <label>Password<input name="password" type="password" autoComplete="current-password" required /></label>
     <button type="submit" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>
     {message && <p role="alert">{message}</p>}
+    <SocialSignIn />
     <p><Link href="/forgot-password">Forgot password?</Link></p>
     <p>New here? <Link href="/register">Create an account</Link></p>
   </form>;
