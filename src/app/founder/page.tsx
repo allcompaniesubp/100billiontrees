@@ -27,7 +27,8 @@ const focusAreas = [
 
 export default function FounderPage() {
   return (
-    <main className="founder-page">
+    <main id="main-content" className="founder-page">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="site-header">
         <Link className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation — India" style={{width:260,maxWidth:"100%"}} /></Link>
         <nav className="nav" aria-label="Main navigation">
@@ -36,6 +37,7 @@ export default function FounderPage() {
           <Link href="/#countries">Countries</Link>
           <Link href="/founder" aria-current="page">Founder</Link>
         </nav>
+        <details className="mobile-nav"><summary aria-label="Open navigation menu">Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><Link href="/#mission">Our mission</Link><Link href="/#progress">Global progress</Link><Link href="/#countries">Countries</Link><Link href="/founder" aria-current="page">Founder</Link><Link href="/trees">Trees</Link><Link href="/community">Community</Link><Link href="/#participate">Get involved</Link></nav></details>
         <Link className="header-cta" href="/#participate">🌿 Join the movement</Link>
       </header>
 
