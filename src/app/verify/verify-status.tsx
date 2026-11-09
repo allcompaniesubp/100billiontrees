@@ -15,6 +15,9 @@ export default function VerifyStatus() {
         const url = new URL(window.location.href);
         const code = url.searchParams.get("code");
         const errorDescription = url.searchParams.get("error_description");
+        const hash = new URLSearchParams(url.hash.replace(/^#/, ""));
+        const accessToken = hash.get("access_token");
+        const refreshToken = hash.get("refresh_token");
 
         if (errorDescription) {
           throw new Error(errorDescription.replace(/\+/g, " "));
@@ -23,18 +26,25 @@ export default function VerifyStatus() {
         if (code) {
           const { error } = await supabase.auth.exchangeCodeForSession(code);
           if (error) throw error;
-          url.search = "";
-          window.history.replaceState({}, document.title, url.pathname);
+        } else if (accessToken && refreshToken) {
+          const { error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+          if (error) throw error;
         }
 
         const { data, error } = await supabase.auth.getUser();
         if (error) throw error;
-
         if (!active) return;
-        if (data.user) {
+
+        if (data.user?.email_confirmed_at) {
           setMessage("Your email is confirmed successfully. You can now sign in. Your membership may still require administrator approval before uploading.");
+          window.history.replaceState({}, document.title, url.pathname);
+        } else if (data.user) {
+          setMessage("Your account was found, but email confirmation is not yet complete. Please open the latest confirmation email or request a new one.");
         } else {
-          setMessage("We could not find a confirmed session. If you already clicked the email link, try signing in. Otherwise request a fresh confirmation email.");
+          setMessage("No active session was found. If you have already confirmed your email, go to Sign in. Otherwise request a fresh confirmation email.");
         }
       } catch (error) {
         if (!active) return;
