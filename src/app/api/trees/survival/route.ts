@@ -13,7 +13,9 @@ export async function POST(request: Request) {
     const supabase = createUserScopedSupabase(token);
     const { data: auth, error: authError } = await supabase.auth.getUser(token);
     if (authError || !auth.user) return NextResponse.json({ error: "Your session is invalid." }, { status: 401 });
-    const { data: profile, error: profileError } = await supabase.from("profiles").select("approval_status").eq("id", auth.user.id).single();\n    if (profileError || profile?.approval_status !== "approved") return NextResponse.json({ error: "Your account must be approved to submit monitoring reports." }, { status: 403 });\n    const body = await request.json();
+    const { data: profile, error: profileError } = await supabase.from("profiles").select("approval_status").eq("id", auth.user.id).single();
+    if (profileError || profile?.approval_status !== "approved") return NextResponse.json({ error: "Your account must be approved to submit monitoring reports." }, { status: 403 });
+    const body = await request.json();
     const treeId = typeof body.tree_id === "string" ? body.tree_id : "";
     const milestone = typeof body.milestone === "string" ? body.milestone : "";
     const status = typeof body.status === "string" ? body.status : "healthy";
