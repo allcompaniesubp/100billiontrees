@@ -16,7 +16,7 @@ async function staffClient(request: Request) {
 export async function GET(request: Request) {
   const auth = await staffClient(request); if ("error" in auth) return auth.error;
   const { data, error } = await auth.supabase.from("planting_projects")
-    .select("id,project_name,description,country_name,state_province,district,locality,partner_organisation,start_date,expected_completion_date,tree_target,supported_species,land_permission_status,ecological_review_status,project_status,submitted_at,created_at,owner_id")
+    .select("id,project_name,description,country_name,state_province,district,locality,partner_organisation,start_date,expected_completion_date,tree_target,supported_species,land_ownership_type,land_permission_status,ecological_review_status,project_status,submitted_at,created_at,owner_id")
     .eq("project_status","submitted").order("submitted_at",{ascending:true}).limit(100);
   if (error) return NextResponse.json({error:"Could not load project queue."},{status:400});
   return NextResponse.json({projects:data??[]});
