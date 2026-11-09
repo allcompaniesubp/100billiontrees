@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       expected_completion_date: completion,
       tree_target: target,
       supported_species: species,
-      land_permission_status: land === "Other" ? "not_provided" : "pending",
+      land_ownership_type: land,\n      land_permission_status: land === "Other" ? "not_provided" : "pending",
       ecological_review_status: "not_reviewed",
       project_status: "submitted",
       submitted_at: new Date().toISOString(),
