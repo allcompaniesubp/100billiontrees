@@ -16,12 +16,14 @@ const features = [
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="site-header">
         <Link className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation NGO — India" style={{width:260,maxWidth:"100%"}} /></Link>
         <nav className="nav" aria-label="Main navigation">
           <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="/trees">Trees</a><a href="/donate">Donate</a><a href="/community">Community</a><a href="#participate">Get involved</a>
         </nav>
+        <details className="mobile-nav"><summary aria-label="Open navigation menu">Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="/trees">Trees</a><a href="/donate">Donate</a><a href="/community">Community</a><a href="#participate">Get involved</a></nav></details>
         <a className="header-cta" href="/sign-in">Sign in / Register</a>
       </header>
 
