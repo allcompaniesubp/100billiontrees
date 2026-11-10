@@ -21,7 +21,7 @@ export default function Home() {
       <header className="site-header">
         <Link className="brand" href="/"><img src="/entire-space-absolute-foundation.svg" alt="Entire Space Absolute Foundation NGO — India" style={{width:260,maxWidth:"100%"}} /></Link>
         <nav className="nav" aria-label="Main navigation">
-          <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="/trees">Trees</a><a href="/donate">Donate</a><a href="/community">Community</a><a href="#participate">Get involved</a>
+          <a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="/countries">Countries & flags</a><a href="/founder">Founder</a><a href="/trees">Trees</a><a href="/donate">Donate</a><a href="/community">Community</a><a href="#participate">Get involved</a>
         </nav>
         <details className="mobile-nav"><summary aria-label="Open navigation menu">Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><a href="#mission">Our mission</a><a href="#progress">Global progress</a><a href="#countries">Countries</a><a href="/founder">Founder</a><a href="/trees">Trees</a><a href="/donate">Donate</a><a href="/community">Community</a><a href="#participate">Get involved</a></nav></details>
         <a className="header-cta" href="/sign-in">Sign in / Register</a>
@@ -72,7 +72,7 @@ export default function Home() {
         <div className="section-inner">
           <div className="section-head"><div><div className="kicker">Across borders</div><h2>Every place has a part to play.</h2><p className="section-desc">Country and territory profiles will share local projects, suitable species, participating organisations and independently reviewed progress. This preview is illustrative; no country progress is claimed.</p></div></div>
           <div className="country-grid">{countries.map(([flag,name])=><div className="country" key={name}><span className="flag">{flag}</span><div><strong>{name}</strong><small>Profile planned</small></div><span className="country-empty">Not yet reported</span></div>)}</div>
-          <p className="hero-note">The full directory will distinguish UN Member States, observer States and other territories using authoritative geographic reference data.</p>
+          <p className="hero-note">The full directory includes 193 UN Member States and the two UN observer States, with each country’s national flag.</p><div className="hero-actions"><Link className="btn-primary" href="/countries">Explore all 195 countries & flags →</Link></div>
         </div>
       </section>
 
