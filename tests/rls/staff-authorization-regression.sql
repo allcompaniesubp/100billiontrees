@@ -244,8 +244,8 @@ do $$ declare n int; begin
   if n <> 2 then raise exception 'pending member expected approved + own pending posts, got %', n; end if;
   select count(*) into n from storage.objects where bucket_id='community-media';
   if n <> 2 then raise exception 'pending member expected approved + own media, got %', n; end if;
-  insert into public.community_posts(id,author_id,caption,moderation_status,consent_confirmed)
-  values ('10000000-0000-0000-0000-000000000004',auth.uid(),'pending upload test','pending',true);
+  insert into public.community_posts(id,author_id,caption,media_path,media_type,moderation_status,consent_confirmed)
+  values ('10000000-0000-0000-0000-000000000004',auth.uid(),'pending upload test',auth.uid()::text||'/new.png','image','pending',true);
   insert into storage.objects(id,bucket_id,name,owner_id)
   values ('20000000-0000-0000-0000-000000000004','community-media',
     auth.uid()::text||'/new.png',auth.uid()::text);
