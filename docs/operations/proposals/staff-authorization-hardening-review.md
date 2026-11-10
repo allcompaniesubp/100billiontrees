@@ -29,7 +29,7 @@ The companion SQL proposal:
 - Uses `private.is_staff()` for staff branches in support conversation and message SELECT/INSERT policies.
 - Leaves member ownership paths, member upload eligibility, and all table schemas unchanged.
 
-The proposal does not change profile role assignment, JWT claims, grants, bucket configuration, or any production data.
+The live INSERT policies for both `community_posts` and the `community-media` bucket permit members whose approval status is either `pending` or `approved` to submit private media for review. The proposal does not change that eligibility, profile role assignment, JWT claims, grants, bucket configuration, or any production data.
 
 ## Required validation before adoption
 
