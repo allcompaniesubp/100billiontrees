@@ -43,9 +43,9 @@ export default function Messaging() {
       return;
     }
     setUserId(auth.user.id);
-    const { data: profile, error: profileError } = await supabase.from("profiles").select("role").eq("id", auth.user.id).maybeSingle();
+    const { data: profile, error: profileError } = await supabase.from("profiles").select("role,approval_status").eq("id", auth.user.id).maybeSingle();
     if (profileError) throw profileError;
-    const staff = profile?.role === "administrator" || profile?.role === "reviewer";
+    const staff = profile?.approval_status === "approved" && (profile.role === "administrator" || profile.role === "reviewer");
     setIsStaff(staff);
     const { data, error } = await supabase.from("support_conversations")
       .select("id,subject,status,created_by,created_at")
