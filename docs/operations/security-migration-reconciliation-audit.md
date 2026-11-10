@@ -98,3 +98,16 @@ Two reconciliation blockers are now explicit:
 The first eight production migration records also still require a verified one-to-one source mapping. The recovered project-family files do not resolve that earlier history.
 
 No SQL was applied during this follow-up. The audit remains read-only and the production database remains unchanged.
+
+## Follow-up: live project/survival schema snapshot (read-only)
+
+The production schema currently contains the project and monitoring fields expected by the current application, including `land_ownership_type`, `land_permission_status`, `reviewed_by`, `reviewed_at`, and the survival-log `review_status` field. The expected date, positive tree-target, land-type, survival milestone/status, evidence-path, GPS-range, and reviewer foreign-key constraints are present.
+
+Current policies observed:
+
+- `planting_projects`: own approved-member insert with server-controlled review fields; authenticated read for approved projects, owner, or staff; anonymous read only for approved projects; owner update restricted to draft rows or staff.
+- `tree_survival_logs`: insert limited to an approved profile reporting for an owned/created eligible tree, with pending review and reviewer fields unset; read for reporter, project owner, or staff; update limited to staff.
+
+These live policy expressions are a useful target for comparison, but do not prove the full applied migration text or migration order. The production schema currently contains the intended project/survival feature objects; the migration-history/source mismatch remains unresolved.
+
+No production data, policies, grants, schema, or Auth configuration was changed during this check.
