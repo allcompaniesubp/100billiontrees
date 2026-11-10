@@ -134,3 +134,5 @@ GitHub history confirms these source-file candidates:
 | `20261109122044 capture_land_type_and_require_approved_monitoring_reporters` | `202611090006_...` and `202611090008_...` | Ambiguous duplicate/overlapping source files; production mapping not proven |
 
 This narrows the missing/uncertain history to five early migration artifacts, the project-submission tightening migration, the exact historical version of the initial schema, and the final land-type migration selection. It does not authorize a fresh bootstrap or any production replay. The current production schema snapshot should be used as a validation target once the exact SQL is recovered.
+
+The two land-type files were compared directly: their SQL statements are functionally the same; the differences are a descriptive comment and line wrapping around the check constraint. This makes the duplicate highly likely to be redundant, but it still does not establish which filename/version corresponds to the production migration record. Do not delete either migration or rewrite the applied history until the production migration artifact is verified.
