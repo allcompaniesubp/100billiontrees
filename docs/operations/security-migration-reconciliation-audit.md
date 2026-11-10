@@ -136,3 +136,17 @@ GitHub history confirms these source-file candidates:
 This narrows the missing/uncertain history to five early migration artifacts, the project-submission tightening migration, the exact historical version of the initial schema, and the final land-type migration selection. It does not authorize a fresh bootstrap or any production replay. The current production schema snapshot should be used as a validation target once the exact SQL is recovered.
 
 The two land-type files were compared directly: their SQL statements are functionally the same; the differences are a descriptive comment and line wrapping around the check constraint. This makes the duplicate highly likely to be redundant, but it still does not establish which filename/version corresponds to the production migration record. Do not delete either migration or rewrite the applied history until the production migration artifact is verified.
+
+## Definitive recovery: exact production migration SQL captured (2026-11-10)
+
+The prior source-recovery blockers are resolved. The Supabase migration ledger stores the complete applied SQL in `supabase_migrations.schema_migrations.statements`. I retrieved all 14 rows directly from the connected production project's migration ledger and archived each statement set under:
+
+`docs/operations/production-migration-snapshot/`
+
+Verification was performed against the live ledger after writing the archive: **14 of 14 archived SQL files matched the corresponding production `statements` payload exactly**, including the previously missing `20261109121547_tighten_project_submission_and_staff_review_access` migration and the exact final land-type/approved-reporter migration. The earlier ambiguity between historical GitHub source files is therefore no longer a blocker for reconstructing the applied production sequence.
+
+Important handling rule: this directory is a **forensic snapshot/archive**, not the active Supabase CLI migration directory. Do not copy these files into `supabase/migrations/`, rename them, or run/replay them against production. Their versions are already recorded as applied. The existing active migration directory still needs a deliberate reconciliation plan so that future development environments can reproduce the production schema without duplicate versions or accidental replays.
+
+The initial schema snapshot also captures the exact production-applied form, rather than the later amended GitHub source version. The migration ledger snapshot is now the source of truth for the 14 applied migrations.
+
+No SQL was applied, and no production database schema, policy, storage object, user data, Auth setting, or environment variable was changed during this recovery.
