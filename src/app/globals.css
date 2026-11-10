@@ -367,3 +367,29 @@ footer .brand{color:white}
 .portal .max-w-5xl>article button:focus-visible{outline:3px solid #8bb77a;outline-offset:3px}
 .portal .portal-note{width:calc(100% - 32px)}
 @media(max-width:640px){.portal header{height:auto;min-height:64px;flex-wrap:wrap;justify-content:flex-start;padding:12px 16px}.portal .portal-hero{padding-top:42px}}
+
+/* Community moderation review queue */
+.community-review-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.community-review-filters{display:flex;gap:7px;flex-wrap:wrap}
+.community-review-filters button,.community-review-refresh{border:1px solid #d5e3d6;border-radius:999px;padding:10px 14px;background:#fff;color:#315b41;font-size:11px;font-weight:750;cursor:pointer}
+.community-review-filters button.active{background:#e7f2e6;border-color:#9dbd9e;color:#174b32}
+.community-review-refresh:disabled{opacity:.55;cursor:wait}
+.community-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.community-review-card{overflow:hidden;border:1px solid #e1ebe2;border-radius:17px;background:#fff}
+.community-review-card>img,.community-review-card>video{display:block;width:100%;height:260px;object-fit:cover;background:#edf2ed}
+.community-review-card-body{padding:16px;display:grid;gap:10px}
+.community-review-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#627668;font-size:10px}
+.community-review-card-body>p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:#294936;font-size:13px;line-height:1.65}
+.community-review-state{justify-self:start;padding:5px 9px;border-radius:999px;background:#f0f3f0;color:#53685a;font-size:10px;font-weight:800;text-transform:capitalize}
+.community-review-state.pending{background:#fff3d8;color:#865b14}
+.community-review-state.approved{background:#e6f4e7;color:#23633b}
+.community-review-state.rejected{background:#fbe9e7;color:#9a3930}
+.community-review-actions{display:flex;gap:8px;flex-wrap:wrap}
+.community-review-actions button{border:0;border-radius:999px;padding:10px 15px;background:#1e633d;color:#fff;font-size:11px;font-weight:750;cursor:pointer}
+.community-review-actions button.reject{background:#fff;color:#9a3930;border:1px solid #e6c5c1}
+.community-review-actions button:disabled{opacity:.55;cursor:wait}
+.community-review-reviewed{color:#718477;font-size:10px}
+.community-review-no-media,.community-review-empty{padding:26px;border:1px dashed #cbdacb;border-radius:14px;background:#f8fbf7;color:#66796b;font-size:12px;line-height:1.7}
+.community-review-empty h2{margin:0 0 5px;color:#174b32;font-size:18px}
+.community-review-empty p{margin:0}
+@media(max-width:700px){.community-review-grid{grid-template-columns:1fr}.community-review-card>img,.community-review-card>video{height:220px}}
