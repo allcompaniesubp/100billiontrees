@@ -26,7 +26,7 @@ $$;
 create function storage.foldername(name text) returns text[]
 language sql immutable
 as $$
-  select string_to_array(name, '/')[1:greatest(array_length(string_to_array(name, '/'), 1) - 1, 0)]
+  select (string_to_array(name, '/'))[1:greatest(array_length(string_to_array(name, '/'), 1) - 1, 0)]
 $$;
 
 create table public.profiles (
@@ -241,9 +241,9 @@ select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000004'
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-000000000004","app_metadata":{"role":"member"}}',false);
 do $$ declare n int; begin
   select count(*) into n from public.community_posts;
-  if n <> 1 then raise exception 'pending member expected own pending post, got %', n; end if;
+  if n <> 2 then raise exception 'pending member expected approved + own pending posts, got %', n; end if;
   select count(*) into n from storage.objects where bucket_id='community-media';
-  if n <> 1 then raise exception 'pending member expected own media only, got %', n; end if;
+  if n <> 2 then raise exception 'pending member expected approved + own media, got %', n; end if;
   insert into public.community_posts(id,author_id,caption,moderation_status,consent_confirmed)
   values ('10000000-0000-0000-0000-000000000004',auth.uid(),'pending upload test','pending',true);
   insert into storage.objects(id,bucket_id,name,owner_id)
@@ -278,9 +278,9 @@ select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000005'
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-000000000005","app_metadata":{"role":"reviewer"}}',false);
 do $$ declare n int; begin
   select count(*) into n from public.community_posts;
-  if n <> 1 then raise exception 'rejected former staff expected approved posts only, got %', n; end if;
+  if n <> 2 then raise exception 'rejected former staff expected approved posts only, got %', n; end if;
   select count(*) into n from storage.objects where bucket_id='community-media';
-  if n <> 1 then raise exception 'former staff expected no staff media access, got %', n; end if;
+  if n <> 2 then raise exception 'former staff expected approved media only, got %', n; end if;
   select count(*) into n from public.support_conversations;
   if n <> 0 then raise exception 'former staff expected no support inbox access, got %', n; end if;
   update public.community_posts set moderation_status='rejected'
