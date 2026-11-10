@@ -111,3 +111,26 @@ Current policies observed:
 These live policy expressions are a useful target for comparison, but do not prove the full applied migration text or migration order. The production schema currently contains the intended project/survival feature objects; the migration-history/source mismatch remains unresolved.
 
 No production data, policies, grants, schema, or Auth configuration was changed during this check.
+
+## Follow-up: expanded migration provenance map
+
+GitHub history confirms these source-file candidates:
+
+| Production migration record | Repository source candidate | Reconciliation status |
+|---|---|---|
+| `20261108110315 initial_200_billion_trees_schema` | `202611080001_initial_schema.sql` | Base source found, but the file was subsequently amended (including profile-trigger and certificate-view changes); the exact SQL at production-apply time is not yet proven |
+| `20261108110329 community_media_moderated_storage` | — | Source artifact not found |
+| `20261108110348 restrict_internal_rls_event_trigger_function` | — | Source artifact not found |
+| `20261108110359 tighten_profile_trigger_and_add_fk_indexes` | — | No separately verified production-version artifact found; later edits to the initial schema are not sufficient proof |
+| `20261108110604 create_member_profiles_and_moderation_controls` | — | Source artifact not found |
+| `20261108110845 optimize_community_moderation_rls_policies` | — | Source artifact not found |
+| `20261109052831 member_uploads_and_private_messaging` | `202611090001_member_uploads_and_private_messaging.sql` | Source file found; compare exact production-applied text before declaring byte-identical |
+| `20261109054644 tree_registry_certificate_admin` | `202611090002_tree_registry_certificate_admin.sql` | Source file found; compare exact production-applied text before declaring byte-identical |
+| `20261109121316 projects_and_tree_survival_monitoring` | `202611090003_projects_and_survival_monitoring.sql` | Source file found; timestamp differs |
+| `20261109121547 tighten_project_submission_and_staff_review_access` | — | Source artifact not found |
+| `20261109121602 add_survival_log_review_status` | `202611090004_survival_review_state.sql` | Source file found; timestamp differs |
+| `20261109121741 consolidate_project_review_policies_and_indexes` | `202611090005_consolidate_project_review_policies.sql` | Source file found; timestamp differs |
+| `20261109121811 restrict_public_project_fields_and_split_read_policies` | `202611090007_restrict_public_project_fields.sql` | Source file found; timestamp differs |
+| `20261109122044 capture_land_type_and_require_approved_monitoring_reporters` | `202611090006_...` and `202611090008_...` | Ambiguous duplicate/overlapping source files; production mapping not proven |
+
+This narrows the missing/uncertain history to five early migration artifacts, the project-submission tightening migration, the exact historical version of the initial schema, and the final land-type migration selection. It does not authorize a fresh bootstrap or any production replay. The current production schema snapshot should be used as a validation target once the exact SQL is recovered.
