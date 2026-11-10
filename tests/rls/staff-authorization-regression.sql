@@ -272,6 +272,20 @@ do $$ declare n int; begin
 end $$;
 reset role;
 
+-- Approved administrator: same current-profile staff access as reviewer.
+set role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000001',false);
+select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-000000000001","app_metadata":{"role":"administrator"}}',false);
+do $ declare n int; begin
+  select count(*) into n from public.community_posts;
+  if n <> 4 then raise exception 'administrator expected all 4 posts, got %', n; end if;
+  select count(*) into n from storage.objects where bucket_id='community-media';
+  if n <> 4 then raise exception 'administrator expected all 4 linked media objects, got %', n; end if;
+  select count(*) into n from public.support_conversations;
+  if n <> 2 then raise exception 'administrator expected all support conversations, got %', n; end if;
+end $;
+reset role;
+
 -- Former staff with a stale JWT role: current rejected profile must deny staff access.
 set role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000005',false);
