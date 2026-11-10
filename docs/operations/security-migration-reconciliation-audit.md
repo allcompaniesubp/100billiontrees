@@ -22,7 +22,7 @@ The connected database reports 14 applied migrations:
 - 20261108110845 optimize_community_moderation_rls_policies
 - 20261109052831 member_uploads_and_private_messaging
 - 20261109054644 tree_registry_certificate_admin
-- 20261109052831 projects_and_tree_survival_monitoring
+- 20261109121316 projects_and_tree_survival_monitoring
 - 20261109121547 tighten_project_submission_and_staff_review_access
 - 20261109121602 add_survival_log_review_status
 - 20261109121741 consolidate_project_review_policies_and_indexes
