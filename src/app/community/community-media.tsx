@@ -71,7 +71,7 @@ export default function CommunityMedia() {
     if (status === "approved") {
       setMessage("Your member account is approved. You can upload photos and videos for review.");
     } else if (status === "pending") {
-      setMessage("Your membership is pending. You can still submit photos and videos; every upload stays private until a moderator reviews it.");
+      setMessage("Your membership is pending. You can view your own submissions, but uploads become available after membership approval.");
     } else {
       setMessage("Your account is not currently eligible to upload. Please contact the Foundation if you think this is an error.");
     }
@@ -157,7 +157,7 @@ export default function CommunityMedia() {
     await refresh();
   }
 
-  const canUpload = approval === "approved" || approval === "pending";
+  const canUpload = approval === "approved";
 
   return <section className="community-media">
     <div className="community-media-heading">
@@ -173,7 +173,7 @@ export default function CommunityMedia() {
         <label>Caption<textarea value={caption} onChange={(event) => setCaption(event.target.value)} maxLength={2000} rows={3} placeholder="Tell the community about your planting or tree-care activity." /></label>
         <label className="community-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} required /> I own this media or have permission to share it, have obtained consent from identifiable people, and understand it will remain private until reviewed.</label>
         <button type="submit" disabled={busy || !file || !consent}>{busy ? "Uploading…" : "Upload photo or video for review"}</button>
-      </form> : <div className="community-pending"><strong>Uploads temporarily unavailable</strong><p>Please contact the Foundation if you need help with your member account.</p><a href="/messages">Message the Foundation</a></div>}
+      </form> : <div className="community-pending"><strong>{approval === "pending" ? "Membership approval pending" : "Uploads temporarily unavailable"}</strong><p>{approval === "pending" ? "You can view your own submissions here. Once your membership is approved, you can upload photos and videos for moderator review." : "Please contact the Foundation if you need help with your member account."}</p><a href="/messages">Message the Foundation</a></div>}
       <div className="community-post-grid">
         {posts.map((post) => <article className="community-post" key={post.id}>
           {post.signedUrl ? post.media_type === "image"
