@@ -76,3 +76,25 @@ The advisor also reported 24 unused indexes and one multiple-permissive-policy w
 - pg_policies inspected for public.profiles and public.audit_events.
 - information_schema inspected for public.audit_events columns.
 - No production mutation performed.
+
+## Follow-up: migration source recovery (2026-11-10)
+
+GitHub commit diffs provide source SQL for the project/survival-monitoring migration family. The recovered repository files are:
+
+- `202611090003_projects_and_survival_monitoring.sql` (introduced in commit `000e0f0`; later included in the project-management feature history).
+- `202611090004_survival_review_state.sql` (introduced in commit `8881f5d`).
+- `202611090005_consolidate_project_review_policies.sql` (introduced in commit `0220d86`).
+- `202611090006_land_type_and_approved_monitoring_reporters.sql` (introduced in commit `a33175c`, and amended in commit `1ee1f91`).
+- `202611090007_restrict_public_project_fields.sql` (introduced in commit `e2d8fb1`).
+- `202611090008_land_type_and_approved_monitoring_reporters.sql` (introduced in commit `9698172`).
+
+These source files cover the same broad project/survival feature sequence as several later production migration records, but their filename versions do not match the production migration versions. They are evidence of source history, not proof that each file is byte-for-byte identical to the SQL applied in production.
+
+Two reconciliation blockers are now explicit:
+
+1. The production record `20261109121547 tighten_project_submission_and_staff_review_access` has not yet been matched to a corresponding committed SQL artifact. Do not infer or recreate its SQL from the migration name.
+2. The repository contains both `202611090006` and `202611090008` land-type/approved-reporter migration files. Their SQL is substantially overlapping; the later file is not a safe substitute for determining exactly which SQL was applied under production record `20261109122044`. Compare complete file contents and live schema before deciding whether one is redundant or represents an intentional correction.
+
+The first eight production migration records also still require a verified one-to-one source mapping. The recovered project-family files do not resolve that earlier history.
+
+No SQL was applied during this follow-up. The audit remains read-only and the production database remains unchanged.
